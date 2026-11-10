@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,772 +7,426 @@
 <title>Pruceys Unblocked+</title>
 <style>
 :root {
-  --bg:#09090f;
-  --panel:#11111b;
-  --panel2:#1b1b29;
-  --border:#2a2a3a;
-  --text:#f4f4fa;
-  --muted:#9999ad;
-  --accent:#8b5cf6;
+  --bg: #101014;
+  --panel: #19191f;
+  --panel2: #22222b;
+  --accent: #9565ff;
+  --text: #f5f3fa;
+  --muted: #aaa6b5;
 }
-* {box-sizing:border-box}
+* { box-sizing: border-box; }
 body {
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
-  font-family:Arial,sans-serif;
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, sans-serif;
 }
-button,input {font:inherit}
-button {cursor:pointer;color:inherit}
-.app {display:flex;height:100vh;overflow:hidden}
-
-/* SIDEBAR */
+button, input { font: inherit; }
+button { cursor: pointer; }
+.app { display: flex; min-height: 100vh; }
 .sidebar {
-  width:225px;
-  flex-shrink:0;
-  background:var(--panel);
-  border-right:1px solid var(--border);
-  padding:15px 12px;
-  transition:width .2s;
+  width: 215px;
+  background: #15151b;
+  padding: 22px 14px;
+  flex-shrink: 0;
+  border-right: 1px solid #292832;
 }
-.sidebar.closed {width:68px}
-.logo {font-size:21px;font-weight:bold;padding:15px 8px 25px}
-.logo span {color:var(--accent)}
-.menu {
-  width:100%;
-  padding:12px;
-  background:var(--panel2);
-  border:1px solid var(--border);
-  border-radius:9px;
-  margin-bottom:20px;
+.logo { font-size: 21px; font-weight: bold; margin: 4px 8px 28px; }
+.logo span { color: var(--accent); }
+.nav-button {
+  width: 100%;
+  text-align: left;
+  padding: 12px;
+  margin: 3px 0;
+  border: 0;
+  border-radius: 9px;
+  color: var(--muted);
+  background: transparent;
 }
-.nav-label {
-  font-size:11px;
-  color:var(--muted);
-  padding:12px 8px;
-  text-transform:uppercase;
+.nav-button:hover, .nav-button.active {
+  background: var(--panel2);
+  color: white;
 }
-.nav-btn {
-  display:flex;
-  align-items:center;
-  gap:13px;
-  width:100%;
-  padding:13px;
-  margin:3px 0;
-  background:transparent;
-  border:0;
-  border-radius:9px;
-  color:var(--muted);
-  text-align:left;
+.main { flex: 1; min-width: 0; }
+.topbar {
+  height: 62px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px;
+  background: #15151b;
+  border-bottom: 1px solid #292832;
 }
-.nav-btn:hover,.nav-btn.active {
-  background:var(--panel2);
-  color:white;
-}
-.nav-icon {font-size:19px;min-width:20px;text-align:center}
-.sidebar.closed .nav-label,
-.sidebar.closed .nav-text,
-.sidebar.closed .logo span {display:none}
-.sidebar.closed .nav-btn {justify-content:center}
-
-/* BROWSER */
-.main {flex:1;min-width:0;display:flex;flex-direction:column}
-.top {
-  padding:10px;
-  background:var(--panel);
-  border-bottom:1px solid var(--border);
-}
-.tabs {display:flex;gap:7px;margin-bottom:10px;overflow-x:auto}
-.tab {
-  min-width:120px;
-  padding:10px;
-  border:1px solid var(--border);
-  border-radius:9px;
-  background:var(--bg);
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  white-space:nowrap;
-  cursor:pointer;
-}
-.tab.active {border-color:var(--accent);background:var(--panel2)}
-.tab-close {
-  background:transparent;
-  border:0;
-  color:var(--muted);
-  font-size:17px;
-}
-.add-tab,.tool {
-  background:var(--panel2);
-  border:1px solid var(--border);
-  border-radius:9px;
-  padding:10px 13px;
-}
-.toolbar {display:flex;gap:7px}
 .address {
-  flex:1;
-  min-width:0;
-  padding:11px;
-  background:var(--bg);
-  color:white;
-  border:1px solid var(--border);
-  border-radius:9px;
-  outline:none;
+  flex: 1;
+  min-width: 0;
+  padding: 11px 14px;
+  border: 1px solid #353440;
+  border-radius: 10px;
+  background: #22222b;
+  color: white;
+  outline: none;
 }
-.address:focus {border-color:var(--accent)}
-.content {flex:1;overflow:auto;position:relative}
-.page {display:none;padding:30px;max-width:1250px;margin:auto}
-.page.active {display:block}
-h1 {font-size:34px;margin:0 0 10px}
-h2 {font-size:22px;margin-top:35px}
-.subtitle {color:var(--muted);margin-bottom:25px}
-.search {
-  display:flex;
-  gap:8px;
-  max-width:750px;
+.address:focus { border-color: var(--accent); }
+.small-button {
+  border: 0;
+  background: var(--panel2);
+  color: white;
+  padding: 10px 13px;
+  border-radius: 9px;
 }
-.search input {
-  flex:1;
-  min-width:0;
-  padding:14px;
-  background:var(--panel);
-  border:1px solid var(--border);
-  border-radius:10px;
-  color:white;
-}
-.primary {
-  background:var(--accent);
-  border:0;
-  border-radius:9px;
-  padding:12px 18px;
-  font-weight:bold;
-}
+.small-button:hover { background: #353344; }
+.content { padding: 28px; max-width: 1200px; margin: auto; }
+h1 { margin: 0 0 8px; font-size: 29px; }
+.subtitle { color: var(--muted); margin: 0 0 25px; }
+.section-title { margin: 30px 0 14px; font-size: 18px; }
 .grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(175px,1fr));
-  gap:14px;
-  margin-top:20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+  gap: 14px;
 }
 .card {
-  background:var(--panel);
-  border:1px solid var(--border);
-  border-radius:13px;
-  padding:20px;
-  min-height:115px;
-  text-align:left;
-  transition:.2s;
+  background: var(--panel);
+  border: 1px solid #2b2935;
+  border-radius: 13px;
+  padding: 19px;
+  min-height: 105px;
+  color: white;
+  text-align: left;
+  transition: .15s;
 }
-.card:hover {border-color:var(--accent);transform:translateY(-3px)}
-.card strong {display:block;font-size:16px;margin-bottom:9px}
-.card small {color:var(--muted)}
-.notice {
-  padding:15px;
-  margin-top:20px;
-  background:var(--panel);
-  border:1px solid var(--border);
-  border-radius:10px;
-  color:var(--muted);
-  line-height:1.6;
+.card:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  background: #22212c;
 }
-.settings-row {
-  padding:15px;
-  margin:12px 0;
-  max-width:450px;
-  background:var(--panel);
-  border:1px solid var(--border);
-  border-radius:10px;
-  display:flex;
-  justify-content:space-between;
+.card strong { display: block; margin-bottom: 7px; font-size: 16px; }
+.card small { color: var(--muted); }
+.icon { font-size: 25px; margin-bottom: 12px; }
+.page { display: none; }
+.page.active { display: block; }
+.browser {
+  display: none;
+  height: calc(100vh - 62px);
+  flex-direction: column;
 }
-select {
-  background:var(--panel2);
-  color:white;
-  padding:8px;
-  border:1px solid var(--border);
-  border-radius:8px;
+.browser.active { display: flex; }
+.browser-info {
+  padding: 9px 14px;
+  background: #19191f;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--muted);
+  font-size: 13px;
 }
-.external-link {
-  display:inline-block;
-  background:var(--accent);
-  color:white;
-  padding:13px 20px;
-  border-radius:9px;
-  text-decoration:none;
-  font-weight:bold;
+.browser-info a { color: #c4aaff; }
+iframe {
+  width: 100%;
+  flex: 1;
+  border: 0;
+  background: white;
 }
-
-/* EMBEDDED BROWSER */
-.browser-view {
-  display:none;
-  position:absolute;
-  inset:0;
-  background:white;
-  flex-direction:column;
+.empty {
+  padding: 25px;
+  border-radius: 12px;
+  background: var(--panel);
+  color: var(--muted);
 }
-.browser-view.visible {display:flex}
-.frame-help {
-  background:var(--panel);
-  color:var(--muted);
-  padding:8px 12px;
-  font-size:12px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
+input[type="color"] {
+  width: 48px;
+  height: 35px;
+  border: 0;
+  background: transparent;
 }
-.frame-help a {
-  color:white;
-  text-decoration:none;
-  background:var(--accent);
-  padding:7px 11px;
-  border-radius:7px;
-  white-space:nowrap;
-}
-#browserFrame {
-  display:block;
-  flex:1;
-  width:100%;
-  min-height:0;
-  border:0;
-  background:white;
-}
-@media(max-width:650px) {
-  .sidebar {width:68px}
-  .sidebar .nav-label,.sidebar .nav-text,.sidebar .logo span {display:none}
-  .sidebar .nav-btn {justify-content:center}
-  .page {padding:20px}
-  h1 {font-size:27px}
+@media(max-width:700px) {
+  .sidebar { width: 65px; padding: 15px 7px; }
+  .logo { font-size: 0; margin: 8px 0 20px; }
+  .logo span { font-size: 20px; }
+  .nav-button { text-align: center; font-size: 0; padding: 13px 4px; }
+  .nav-button::first-letter { font-size: 17px; }
+  .content { padding: 20px 14px; }
 }
 </style>
 </head>
-
 <body>
 <div class="app">
+  <aside class="sidebar">
+    <div class="logo">Pruceys <span>+</span></div>
+    <button class="nav-button active" data-page="home">⌂ &nbsp; Home</button>
+    <button class="nav-button" data-page="music">♫ &nbsp; Music</button>
+    <button class="nav-button" data-page="games">🎮 &nbsp; Games</button>
+    <button class="nav-button" data-page="chat">▤ &nbsp; Chat</button>
+    <button class="nav-button" data-page="ai">✦ &nbsp; Pruceys AI</button>
+    <button class="nav-button" data-page="favorites">☆ &nbsp; Favorites</button>
+    <button class="nav-button" data-page="account">♙ &nbsp; Account</button>
+    <button class="nav-button" data-page="settings">⚙ &nbsp; Settings</button>
+  </aside>
 
-<aside class="sidebar" id="sidebar">
-  <div class="logo">P<span>ruceys+</span></div>
-  <button class="menu" id="menu">☰</button>
+  <main class="main">
+    <div class="topbar">
+      <button class="small-button" id="backButton" title="Back">←</button>
+      <button class="small-button" id="forwardButton" title="Forward">→</button>
+      <button class="small-button" id="homeButton" title="Home">⌂</button>
+      <input class="address" id="addressBar" placeholder="Search or enter a website address">
+      <button class="small-button" id="goButton">Go</button>
+    </div>
 
-  <div class="nav-label">Workspace</div>
+    <div class="content">
+      <section class="page active" id="home">
+        <h1>What are we making today?</h1>
+        <p class="subtitle">Welcome to Pruceys Unblocked+.</p>
 
-  <button class="nav-btn active" data-page="home">
-    <span class="nav-icon">⌂</span><span class="nav-text">Home</span>
-  </button>
-  <button class="nav-btn" data-page="music">
-    <span class="nav-icon">♫</span><span class="nav-text">Music</span>
-  </button>
-  <button class="nav-btn" data-page="games">
-    <span class="nav-icon">🎮</span><span class="nav-text">Games</span>
-  </button>
-  <button class="nav-btn" data-page="chat">
-    <span class="nav-icon">▤</span><span class="nav-text">Chat</span>
-  </button>
-  <button class="nav-btn" data-page="ai">
-    <span class="nav-icon">✦</span><span class="nav-text">Pruceys AI</span>
-  </button>
+        <form id="searchForm">
+          <input class="address" id="homeSearch" style="width:100%;padding:15px" placeholder="Search the web with DuckDuckGo...">
+        </form>
 
-  <div class="nav-label">Personal</div>
+        <h2 class="section-title">Quick access</h2>
+        <div class="grid">
+          <button class="card" data-url="https://www.youtube.com/">
+            <div class="icon">▶</div><strong>YouTube</strong><small>Watch videos</small>
+          </button>
+          <button class="card" data-url="https://open.spotify.com/">
+            <div class="icon">♫</div><strong>Spotify</strong><small>Listen to music</small>
+          </button>
+          <button class="card" data-url="https://classroom.google.com/">
+            <div class="icon">📚</div><strong>Google Classroom</strong><small>View your classes</small>
+          </button>
+          <button class="card" data-url="https://www.roblox.com/">
+            <div class="icon">🎮</div><strong>Roblox</strong><small>Play and create</small>
+          </button>
+          <button class="card" data-url="https://poki.com/">
+            <div class="icon">🕹️</div><strong>Poki</strong><small>Play browser games</small>
+          </button>
+          <button class="card" data-url="https://duckduckgo.com/">
+            <div class="icon">🔎</div><strong>DuckDuckGo</strong><small>Search the web</small>
+          </button>
+        </div>
+      </section>
 
-  <button class="nav-btn" data-page="bookmarks">
-    <span class="nav-icon">☆</span><span class="nav-text">Favorites</span>
-  </button>
-  <button class="nav-btn" data-page="account">
-    <span class="nav-icon">♙</span><span class="nav-text">Account</span>
-  </button>
-  <button class="nav-btn" data-page="settings">
-    <span class="nav-icon">⚙</span><span class="nav-text">Settings</span>
-  </button>
-</aside>
+      <section class="page" id="music">
+        <h1>Music</h1>
+        <p class="subtitle">Your music destinations.</p>
+        <div class="grid">
+          <button class="card" data-url="https://open.spotify.com/"><div class="icon">♫</div><strong>Spotify</strong><small>Stream music</small></button>
+          <button class="card" data-url="https://music.youtube.com/"><div class="icon">▶</div><strong>YouTube Music</strong><small>Music and mixes</small></button>
+          <button class="card" data-url="https://soundcloud.com/"><div class="icon">☁</div><strong>SoundCloud</strong><small>Discover music</small></button>
+          <button class="card" data-url="https://music.apple.com/"><div class="icon">♪</div><strong>Apple Music</strong><small>Listen to songs</small></button>
+        </div>
+      </section>
 
-<main class="main">
+      <section class="page" id="games">
+        <h1>Games</h1>
+        <p class="subtitle">Game websites and destinations.</p>
+        <div class="grid">
+          <button class="card" data-url="https://poki.com/"><div class="icon">🕹️</div><strong>Poki</strong><small>Browser games</small></button>
+          <button class="card" data-url="https://www.roblox.com/"><div class="icon">🎮</div><strong>Roblox</strong><small>Games and experiences</small></button>
+        </div>
+      </section>
 
-<header class="top">
-  <div class="tabs" id="tabs"></div>
+      <section class="page" id="chat">
+        <h1>Chat</h1>
+        <p class="subtitle">Your chat space.</p>
+        <div class="empty">Chat features can be added here later.</div>
+      </section>
 
-  <div class="toolbar">
-    <button class="tool" id="back" title="Back">←</button>
-    <button class="tool" id="forward" title="Forward">→</button>
-    <button class="tool" id="refresh" title="Refresh">↻</button>
-    <button class="tool" id="homeButton" title="Home">⌂</button>
-    <input class="address" id="address" placeholder="Search or enter a website address...">
-    <button class="tool" id="favorite" title="Add favorite">☆</button>
-  </div>
-</header>
+      <section class="page" id="ai">
+        <h1>Pruceys AI</h1>
+        <p class="subtitle">Your AI corner.</p>
+        <div class="empty">An AI chat feature can be added here later.</div>
+      </section>
 
-<div class="content" id="content">
+      <section class="page" id="favorites">
+        <h1>Favorites</h1>
+        <p class="subtitle">Your saved websites.</p>
+        <div class="grid" id="favoritesGrid"></div>
+      </section>
 
-<section class="page active" id="home">
-  <h1>What are we doing today?</h1>
-  <p class="subtitle">Welcome to Pruceys Unblocked+.</p>
+      <section class="page" id="account">
+        <h1>Account</h1>
+        <p class="subtitle">Account settings.</p>
+        <div class="empty">Account features are not connected yet.</div>
+      </section>
 
-  <form class="search" id="searchForm">
-    <input id="searchInput" placeholder="Search with DuckDuckGo..." required>
-    <button class="primary">Search</button>
-  </form>
+      <section class="page" id="settings">
+        <h1>Settings</h1>
+        <p class="subtitle">Customize Pruceys Unblocked+.</p>
+        <div class="empty">
+          <label for="accentPicker">Accent color: </label>
+          <input type="color" id="accentPicker" value="#9565ff">
+        </div>
+      </section>
+    </div>
 
-  <h2>Quick access</h2>
-  <div class="grid">
-    <button class="card" data-search="YouTube">
-      <strong>▶ YouTube</strong><small>Videos and creators</small>
-    </button>
-    <button class="card" data-search="Spotify">
-      <strong>♫ Spotify</strong><small>Music and playlists</small>
-    </button>
-    <button class="card" data-search="Google Classroom">
-      <strong>▤ Google Classroom</strong><small>School tools</small>
-    </button>
-    <button class="card" data-search="Roblox">
-      <strong>⬡ Roblox</strong><small>Gaming platform</small>
-    </button>
-  </div>
-</section>
-
-<section class="page" id="music">
-  <h1>Music</h1>
-  <p class="subtitle">Find your favorite music.</p>
-  <div class="grid">
-    <button class="card" data-search="Spotify">
-      <strong>♫ Spotify</strong><small>Music and playlists</small>
-    </button>
-    <button class="card" data-search="YouTube Music">
-      <strong>▶ YouTube Music</strong><small>Listen to music</small>
-    </button>
-    <button class="card" data-search="SoundCloud">
-      <strong>SoundCloud</strong><small>Discover music</small>
-    </button>
-    <button class="card" data-search="Apple Music">
-      <strong>Apple Music</strong><small>Music streaming</small>
-    </button>
-  </div>
-</section>
-
-<section class="page" id="games">
-  <h1>Games</h1>
-  <p class="subtitle">Explore games on Poki.</p>
-  <div class="notice">
-    Poki will try to load right here. If its website doesn't allow embedding,
-    use the button above the page to open it separately.
-  </div>
-  <p style="margin-top:20px">
-    <button class="primary" id="loadPoki">Load Poki</button>
-  </p>
-</section>
-
-<section class="page" id="chat">
-  <h1>Community Chat</h1>
-  <p class="subtitle">Talk with the Pruceys community.</p>
-  <div class="notice">
-    Chat is a preview right now. Messages aren't shared with other users.
-    A real community chat needs secure accounts, moderation, and reporting.
-  </div>
-</section>
-
-<section class="page" id="ai">
-  <h1>✦ Pruceys AI</h1>
-  <p class="subtitle">Your personal assistant.</p>
-  <div class="notice">
-    Pruceys AI is coming soon. A real AI service needs a secure backend.
-  </div>
-  <a class="external-link" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">
-    Open ChatGPT
-  </a>
-</section>
-
-<section class="page" id="bookmarks">
-  <h1>☆ Favorites</h1>
-  <p class="subtitle">Your saved searches.</p>
-  <div class="grid" id="bookmarkList"></div>
-</section>
-
-<section class="page" id="account">
-  <h1>Your Account</h1>
-  <p class="subtitle">Your Pruceys profile.</p>
-  <div class="notice">
-    Real account creation and login will be added when we connect the backend.
-    This version does not collect passwords.
-  </div>
-</section>
-
-<section class="page" id="settings">
-  <h1>Settings</h1>
-  <p class="subtitle">Customize Pruceys.</p>
-
-  <div class="settings-row">
-    <span>Accent color</span>
-    <select id="accent">
-      <option value="#8b5cf6">Purple</option>
-      <option value="#3b82f6">Blue</option>
-      <option value="#22c55e">Green</option>
-      <option value="#ec4899">Pink</option>
-      <option value="#f59e0b">Orange</option>
-      <option value="#06b6d4">Cyan</option>
-    </select>
-  </div>
-
-  <button class="primary" id="reset">Reset settings</button>
-</section>
-
-<div class="browser-view" id="browserView">
-  <div class="frame-help">
-    <span>If the website refuses to load here, try opening it separately.</span>
-    <a id="openExternal" href="#" target="_blank" rel="noopener noreferrer">Open website ↗</a>
-  </div>
-  <iframe
-    id="browserFrame"
-    title="Pruceys browser"
-    allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
-    referrerpolicy="strict-origin-when-cross-origin">
-  </iframe>
-</div>
-
-</div>
-</main>
+    <section class="browser" id="browser">
+      <div class="browser-info">
+        <span id="browserTitle">Website</span>
+        <span>
+          <button class="small-button" id="favoriteButton">☆ Save</button>
+          <a id="externalLink" href="#" target="_blank" rel="noopener">Open website ↗</a>
+        </span>
+      </div>
+      <iframe id="browserFrame" allow="autoplay; fullscreen; encrypted-media; picture-in-picture"></iframe>
+    </section>
+  </main>
 </div>
 
 <script>
-const sidebar = document.getElementById("sidebar");
+const pages = document.querySelectorAll(".page");
+const navButtons = document.querySelectorAll(".nav-button");
+const browser = document.getElementById("browser");
 const frame = document.getElementById("browserFrame");
-const browserView = document.getElementById("browserView");
-const address = document.getElementById("address");
-const tabsElement = document.getElementById("tabs");
-const openExternal = document.getElementById("openExternal");
+const addressBar = document.getElementById("addressBar");
+const browserTitle = document.getElementById("browserTitle");
+const externalLink = document.getElementById("externalLink");
 
-let nextId = 2;
-let activeId = 1;
+let currentUrl = "";
+let currentTitle = "";
+let historyList = [];
+let historyIndex = -1;
 
-let tabs = [{
-  id:1,
-  title:"Home",
-  page:"home",
-  url:"",
-  history:[],
-  historyIndex:-1
-}];
-
-let bookmarks = JSON.parse(
-  localStorage.getItem("pruceysBookmarks") || "[]"
-);
-
-function currentTab() {
-  return tabs.find(t => t.id === activeId);
+function showPage(pageName) {
+  browser.classList.remove("active");
+  pages.forEach(page => page.classList.toggle("active", page.id === pageName));
+  navButtons.forEach(button => button.classList.toggle("active", button.dataset.page === pageName));
 }
 
-function renderTabs() {
-  tabsElement.innerHTML = "";
-
-  tabs.forEach(tab => {
-    const button = document.createElement("div");
-    button.className = "tab" + (tab.id === activeId ? " active" : "");
-
-    const name = document.createElement("span");
-    name.textContent = tab.title;
-
-    const close = document.createElement("button");
-    close.className = "tab-close";
-    close.textContent = "×";
-    close.title = "Close tab";
-
-    close.onclick = e => {
-      e.stopPropagation();
-      closeTab(tab.id);
-    };
-
-    button.append(name,close);
-    button.onclick = () => switchTab(tab.id);
-    tabsElement.appendChild(button);
-  });
-
-  const add = document.createElement("button");
-  add.className = "add-tab";
-  add.textContent = "+";
-  add.title = "New tab";
-  add.onclick = newTab;
-  tabsElement.appendChild(add);
+function showBrowser() {
+  pages.forEach(page => page.classList.remove("active"));
+  navButtons.forEach(button => button.classList.remove("active"));
+  browser.classList.add("active");
 }
 
-function hidePages() {
-  document.querySelectorAll(".page").forEach(p => {
-    p.classList.remove("active");
-  });
-}
-
-function showPage(page) {
-  const tab = currentTab();
-
-  tab.page = page;
-  tab.url = "";
-  tab.title = page.charAt(0).toUpperCase() + page.slice(1);
-
-  browserView.classList.remove("visible");
-  hidePages();
-
-  const pageElement = document.getElementById(page);
-  if(pageElement) pageElement.classList.add("active");
-
-  address.value = "";
-
-  document.querySelectorAll(".nav-btn").forEach(b => {
-    b.classList.toggle("active",b.dataset.page === page);
-  });
-
-  renderTabs();
-
-  if(page === "bookmarks") renderBookmarks();
-}
-
-function displayUrl(url) {
-  const tab = currentTab();
-
-  tab.page = null;
-  tab.url = url;
-
-  hidePages();
-  browserView.classList.add("visible");
-
+function navigate(url, title = "Website", addHistory = true) {
+  currentUrl = url;
+  currentTitle = title;
   frame.src = url;
-  address.value = url;
-  openExternal.href = url;
+  addressBar.value = url;
+  browserTitle.textContent = title;
+  externalLink.href = url;
+  showBrowser();
 
-  document.querySelectorAll(".nav-btn").forEach(b => {
-    b.classList.remove("active");
-  });
-
-  renderTabs();
-}
-
-function navigate(url,title) {
-  const tab = currentTab();
-
-  tab.history = tab.history.slice(0,tab.historyIndex + 1);
-  tab.history.push({url,title});
-  tab.historyIndex = tab.history.length - 1;
-  tab.title = title || "Website";
-
-  displayUrl(url);
+  if (addHistory) {
+    historyList = historyList.slice(0, historyIndex + 1);
+    historyList.push({url, title});
+    historyIndex = historyList.length - 1;
+  }
 }
 
 function search(query) {
-  query = query.trim();
-  if(!query) return;
-
-  const url = "https://duckduckgo.com/?q=" + encodeURIComponent(query);
-  navigate(url,query);
+  const cleaned = query.trim();
+  if (!cleaned) return;
+  navigate("https://duckduckgo.com/?q=" + encodeURIComponent(cleaned), "DuckDuckGo Search");
 }
 
 function navigateAddress(value) {
-  value = value.trim();
-  if(!value) return;
+  const raw = value.trim();
+  if (!raw) return;
 
-  const looksLikeUrl =
-    !value.includes(" ") &&
-    /^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/.test(value);
+  const looksLikeDomain =
+    !raw.includes(" ") &&
+    /^(https?:\/\/)?([\w-]+\.)+[a-z]{2,}(:\d+)?(\/.*)?$/i.test(raw);
 
-  if(looksLikeUrl) {
-    let url = value;
-    if(!/^https?:\/\//i.test(url)) {
-      url = "https://" + url;
-    }
-
-    try {
-      const parsed = new URL(url);
-      if(parsed.protocol !== "http:" && parsed.protocol !== "https:") {
-        search(value);
-        return;
-      }
-      navigate(parsed.href,parsed.hostname);
-    } catch(e) {
-      search(value);
-    }
+  if (looksLikeDomain) {
+    const url = /^https?:\/\//i.test(raw) ? raw : "https://" + raw;
+    navigate(url, raw);
   } else {
-    search(value);
+    search(raw);
   }
 }
 
-function newTab() {
-  const id = nextId++;
+navButtons.forEach(button => {
+  button.addEventListener("click", () => showPage(button.dataset.page));
+});
 
-  tabs.push({
-    id,
-    title:"New Tab",
-    page:"home",
-    url:"",
-    history:[],
-    historyIndex:-1
+document.querySelectorAll("[data-url]").forEach(button => {
+  button.addEventListener("click", () => {
+    const title = button.querySelector("strong")?.textContent || "Website";
+    navigate(button.dataset.url, title);
   });
+});
 
-  activeId = id;
+document.getElementById("goButton").addEventListener("click", () => {
+  navigateAddress(addressBar.value);
+});
+
+addressBar.addEventListener("keydown", event => {
+  if (event.key === "Enter") navigateAddress(addressBar.value);
+});
+
+document.getElementById("searchForm").addEventListener("submit", event => {
+  event.preventDefault();
+  search(document.getElementById("homeSearch").value);
+});
+
+document.getElementById("homeButton").addEventListener("click", () => {
   showPage("home");
-}
-
-function switchTab(id) {
-  activeId = id;
-  const tab = currentTab();
-
-  if(tab.url) {
-    displayUrl(tab.url);
-  } else {
-    showPage(tab.page || "home");
-  }
-}
-
-function closeTab(id) {
-  if(tabs.length === 1) {
-    tabs[0] = {
-      id:1,
-      title:"Home",
-      page:"home",
-      url:"",
-      history:[],
-      historyIndex:-1
-    };
-    activeId = 1;
-    showPage("home");
-    return;
-  }
-
-  const index = tabs.findIndex(t => t.id === id);
-  tabs = tabs.filter(t => t.id !== id);
-
-  if(activeId === id) {
-    activeId = tabs[Math.max(0,index-1)].id;
-    switchTab(activeId);
-  } else {
-    renderTabs();
-  }
-}
-
-document.getElementById("menu").onclick = () => {
-  sidebar.classList.toggle("closed");
-};
-
-document.querySelectorAll(".nav-btn").forEach(button => {
-  button.onclick = () => showPage(button.dataset.page);
 });
 
-document.getElementById("searchForm").onsubmit = e => {
-  e.preventDefault();
-  search(document.getElementById("searchInput").value);
-};
-
-address.addEventListener("keydown",e => {
-  if(e.key === "Enter") navigateAddress(address.value);
+document.getElementById("backButton").addEventListener("click", () => {
+  if (historyIndex > 0) {
+    historyIndex--;
+    const item = historyList[historyIndex];
+    navigate(item.url, item.title, false);
+  }
 });
 
-document.querySelectorAll("[data-search]").forEach(button => {
-  button.onclick = () => search(button.dataset.search);
+document.getElementById("forwardButton").addEventListener("click", () => {
+  if (historyIndex < historyList.length - 1) {
+    historyIndex++;
+    const item = historyList[historyIndex];
+    navigate(item.url, item.title, false);
+  }
 });
 
-document.getElementById("homeButton").onclick = () => showPage("home");
+function getFavorites() {
+  try { return JSON.parse(localStorage.getItem("pruceysFavorites") || "[]"); }
+  catch { return []; }
+}
 
-document.getElementById("loadPoki").onclick = () => {
-  navigate("https://poki.com/","Poki");
-};
-
-document.getElementById("refresh").onclick = () => {
-  const tab = currentTab();
-  if(tab.url) {
-    frame.src = tab.url;
-  }
-};
-
-document.getElementById("back").onclick = () => {
-  const tab = currentTab();
-
-  if(tab.historyIndex > 0) {
-    tab.historyIndex--;
-    const previous = tab.history[tab.historyIndex];
-    tab.title = previous.title;
-    displayUrl(previous.url);
-  } else if(tab.url) {
-    try { frame.contentWindow.history.back(); } catch(e) {}
-  }
-};
-
-document.getElementById("forward").onclick = () => {
-  const tab = currentTab();
-
-  if(tab.historyIndex < tab.history.length - 1) {
-    tab.historyIndex++;
-    const next = tab.history[tab.historyIndex];
-    tab.title = next.title;
-    displayUrl(next.url);
-  } else if(tab.url) {
-    try { frame.contentWindow.history.forward(); } catch(e) {}
-  }
-};
-
-document.getElementById("favorite").onclick = () => {
-  const tab = currentTab();
-
-  if(!tab.url) {
-    alert("Open a website or search first!");
-    return;
-  }
-
-  const existing = bookmarks.some(item =>
-    (typeof item === "string" ? item : item.url) === tab.url
-  );
-
-  if(!existing) {
-    bookmarks.push({
-      title:tab.title,
-      url:tab.url
-    });
-
-    localStorage.setItem("pruceysBookmarks",JSON.stringify(bookmarks));
-    alert("Added to favorites!");
-  } else {
-    alert("Already saved!");
-  }
-};
-
-function renderBookmarks() {
-  const list = document.getElementById("bookmarkList");
-  list.innerHTML = "";
-
-  if(bookmarks.length === 0) {
-    list.textContent = "No favorites yet.";
-    return;
-  }
-
-  bookmarks.forEach(item => {
-    const saved = typeof item === "string"
-      ? {title:item,url:"https://duckduckgo.com/?q="+encodeURIComponent(item)}
-      : item;
-
+function renderFavorites() {
+  const grid = document.getElementById("favoritesGrid");
+  grid.innerHTML = "";
+  getFavorites().forEach(item => {
     const button = document.createElement("button");
     button.className = "card";
-
-    const title = document.createElement("strong");
-    title.textContent = saved.title;
-
-    const description = document.createElement("small");
-    description.textContent = saved.url;
-
-    button.append(title,description);
-    button.onclick = () => navigate(saved.url,saved.title);
-    list.appendChild(button);
+    button.innerHTML = "<div class='icon'>☆</div><strong></strong><small></small>";
+    button.querySelector("strong").textContent = item.title;
+    button.querySelector("small").textContent = item.url;
+    button.addEventListener("click", () => navigate(item.url, item.title));
+    grid.appendChild(button);
   });
+  if (!grid.children.length) {
+    grid.innerHTML = "<div class='empty'>You haven't saved any websites yet.</div>";
+  }
 }
 
-/* SETTINGS */
-const accent = document.getElementById("accent");
+document.getElementById("favoriteButton").addEventListener("click", () => {
+  if (!currentUrl) return;
+  const favorites = getFavorites();
+  if (!favorites.some(item => item.url === currentUrl)) {
+    favorites.push({url: currentUrl, title: currentTitle});
+    localStorage.setItem("pruceysFavorites", JSON.stringify(favorites));
+  }
+  renderFavorites();
+  document.getElementById("favoriteButton").textContent = "★ Saved";
+});
 
-accent.value = localStorage.getItem("pruceysAccent") || "#8b5cf6";
-document.documentElement.style.setProperty("--accent",accent.value);
+document.querySelector('[data-page="favorites"]').addEventListener("click", renderFavorites);
 
-accent.onchange = () => {
-  document.documentElement.style.setProperty("--accent",accent.value);
-  localStorage.setItem("pruceysAccent",accent.value);
-};
+const accentPicker = document.getElementById("accentPicker");
+const savedAccent = localStorage.getItem("pruceysAccent");
+if (savedAccent) {
+  document.documentElement.style.setProperty("--accent", savedAccent);
+  accentPicker.value = savedAccent;
+}
+accentPicker.addEventListener("input", event => {
+  document.documentElement.style.setProperty("--accent", event.target.value);
+  localStorage.setItem("pruceysAccent", event.target.value);
+});
 
-document.getElementById("reset").onclick = () => {
-  localStorage.removeItem("pruceysAccent");
-  location.reload();
-};
-
-renderTabs();
+renderFavorites();
 </script>
 </body>
 </html>
