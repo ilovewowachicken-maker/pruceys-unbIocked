@@ -1,432 +1,275 @@
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pruceys Unblocked+</title>
-<style>
-:root {
-  --bg: #101014;
-  --panel: #19191f;
-  --panel2: #22222b;
-  --accent: #9565ff;
-  --text: #f5f3fa;
-  --muted: #aaa6b5;
-}
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font-family: Arial, sans-serif;
-}
-button, input { font: inherit; }
-button { cursor: pointer; }
-.app { display: flex; min-height: 100vh; }
-.sidebar {
-  width: 215px;
-  background: #15151b;
-  padding: 22px 14px;
-  flex-shrink: 0;
-  border-right: 1px solid #292832;
-}
-.logo { font-size: 21px; font-weight: bold; margin: 4px 8px 28px; }
-.logo span { color: var(--accent); }
-.nav-button {
-  width: 100%;
-  text-align: left;
-  padding: 12px;
-  margin: 3px 0;
-  border: 0;
-  border-radius: 9px;
-  color: var(--muted);
-  background: transparent;
-}
-.nav-button:hover, .nav-button.active {
-  background: var(--panel2);
-  color: white;
-}
-.main { flex: 1; min-width: 0; }
-.topbar {
-  height: 62px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 18px;
-  background: #15151b;
-  border-bottom: 1px solid #292832;
-}
-.address {
-  flex: 1;
-  min-width: 0;
-  padding: 11px 14px;
-  border: 1px solid #353440;
-  border-radius: 10px;
-  background: #22222b;
-  color: white;
-  outline: none;
-}
-.address:focus { border-color: var(--accent); }
-.small-button {
-  border: 0;
-  background: var(--panel2);
-  color: white;
-  padding: 10px 13px;
-  border-radius: 9px;
-}
-.small-button:hover { background: #353344; }
-.content { padding: 28px; max-width: 1200px; margin: auto; }
-h1 { margin: 0 0 8px; font-size: 29px; }
-.subtitle { color: var(--muted); margin: 0 0 25px; }
-.section-title { margin: 30px 0 14px; font-size: 18px; }
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
-  gap: 14px;
-}
-.card {
-  background: var(--panel);
-  border: 1px solid #2b2935;
-  border-radius: 13px;
-  padding: 19px;
-  min-height: 105px;
-  color: white;
-  text-align: left;
-  transition: .15s;
-}
-.card:hover {
-  transform: translateY(-2px);
-  border-color: var(--accent);
-  background: #22212c;
-}
-.card strong { display: block; margin-bottom: 7px; font-size: 16px; }
-.card small { color: var(--muted); }
-.icon { font-size: 25px; margin-bottom: 12px; }
-.page { display: none; }
-.page.active { display: block; }
-.browser {
-  display: none;
-  height: calc(100vh - 62px);
-  flex-direction: column;
-}
-.browser.active { display: flex; }
-.browser-info {
-  padding: 9px 14px;
-  background: #19191f;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  color: var(--muted);
-  font-size: 13px;
-}
-.browser-info a { color: #c4aaff; }
-iframe {
-  width: 100%;
-  flex: 1;
-  border: 0;
-  background: white;
-}
-.empty {
-  padding: 25px;
-  border-radius: 12px;
-  background: var(--panel);
-  color: var(--muted);
-}
-input[type="color"] {
-  width: 48px;
-  height: 35px;
-  border: 0;
-  background: transparent;
-}
-@media(max-width:700px) {
-  .sidebar { width: 65px; padding: 15px 7px; }
-  .logo { font-size: 0; margin: 8px 0 20px; }
-  .logo span { font-size: 20px; }
-  .nav-button { text-align: center; font-size: 0; padding: 13px 4px; }
-  .nav-button::first-letter { font-size: 17px; }
-  .content { padding: 20px 14px; }
-}
-</style>
-</head>
-<body>
-<div class="app">
-  <aside class="sidebar">
-    <div class="logo">Pruceys <span>+</span></div>
-    <button class="nav-button active" data-page="home">⌂ &nbsp; Home</button>
-    <button class="nav-button" data-page="music">♫ &nbsp; Music</button>
-    <button class="nav-button" data-page="games">🎮 &nbsp; Games</button>
-    <button class="nav-button" data-page="chat">▤ &nbsp; Chat</button>
-    <button class="nav-button" data-page="ai">✦ &nbsp; Pruceys AI</button>
-    <button class="nav-button" data-page="favorites">☆ &nbsp; Favorites</button>
-    <button class="nav-button" data-page="account">♙ &nbsp; Account</button>
-    <button class="nav-button" data-page="settings">⚙ &nbsp; Settings</button>
-  </aside>
-
-  <main class="main">
-    <div class="topbar">
-      <button class="small-button" id="backButton" title="Back">←</button>
-      <button class="small-button" id="forwardButton" title="Forward">→</button>
-      <button class="small-button" id="homeButton" title="Home">⌂</button>
-      <input class="address" id="addressBar" placeholder="Search or enter a website address">
-      <button class="small-button" id="goButton">Go</button>
-    </div>
-
-    <div class="content">
-      <section class="page active" id="home">
-        <h1>What are we making today?</h1>
-        <p class="subtitle">Welcome to Pruceys Unblocked+.</p>
-
-        <form id="searchForm">
-          <input class="address" id="homeSearch" style="width:100%;padding:15px" placeholder="Search the web with DuckDuckGo...">
-        </form>
-
-        <h2 class="section-title">Quick access</h2>
-        <div class="grid">
-          <button class="card" data-url="https://www.youtube.com/">
-            <div class="icon">▶</div><strong>YouTube</strong><small>Watch videos</small>
-          </button>
-          <button class="card" data-url="https://open.spotify.com/">
-            <div class="icon">♫</div><strong>Spotify</strong><small>Listen to music</small>
-          </button>
-          <button class="card" data-url="https://classroom.google.com/">
-            <div class="icon">📚</div><strong>Google Classroom</strong><small>View your classes</small>
-          </button>
-          <button class="card" data-url="https://www.roblox.com/">
-            <div class="icon">🎮</div><strong>Roblox</strong><small>Play and create</small>
-          </button>
-          <button class="card" data-url="https://poki.com/">
-            <div class="icon">🕹️</div><strong>Poki</strong><small>Play browser games</small>
-          </button>
-          <button class="card" data-url="https://duckduckgo.com/">
-            <div class="icon">🔎</div><strong>DuckDuckGo</strong><small>Search the web</small>
-          </button>
-        </div>
-      </section>
-
-      <section class="page" id="music">
-        <h1>Music</h1>
-        <p class="subtitle">Your music destinations.</p>
-        <div class="grid">
-          <button class="card" data-url="https://open.spotify.com/"><div class="icon">♫</div><strong>Spotify</strong><small>Stream music</small></button>
-          <button class="card" data-url="https://music.youtube.com/"><div class="icon">▶</div><strong>YouTube Music</strong><small>Music and mixes</small></button>
-          <button class="card" data-url="https://soundcloud.com/"><div class="icon">☁</div><strong>SoundCloud</strong><small>Discover music</small></button>
-          <button class="card" data-url="https://music.apple.com/"><div class="icon">♪</div><strong>Apple Music</strong><small>Listen to songs</small></button>
-        </div>
-      </section>
-
-      <section class="page" id="games">
-        <h1>Games</h1>
-        <p class="subtitle">Game websites and destinations.</p>
-        <div class="grid">
-          <button class="card" data-url="https://poki.com/"><div class="icon">🕹️</div><strong>Poki</strong><small>Browser games</small></button>
-          <button class="card" data-url="https://www.roblox.com/"><div class="icon">🎮</div><strong>Roblox</strong><small>Games and experiences</small></button>
-        </div>
-      </section>
-
-      <section class="page" id="chat">
-        <h1>Chat</h1>
-        <p class="subtitle">Your chat space.</p>
-        <div class="empty">Chat features can be added here later.</div>
-      </section>
-
-      <section class="page" id="ai">
-        <h1>Pruceys AI</h1>
-        <p class="subtitle">Your AI corner.</p>
-        <div class="empty">An AI chat feature can be added here later.</div>
-      </section>
-
-      <section class="page" id="favorites">
-        <h1>Favorites</h1>
-        <p class="subtitle">Your saved websites.</p>
-        <div class="grid" id="favoritesGrid"></div>
-      </section>
-
-      <section class="page" id="account">
-        <h1>Account</h1>
-        <p class="subtitle">Account settings.</p>
-        <div class="empty">Account features are not connected yet.</div>
-      </section>
-
-      <section class="page" id="settings">
-        <h1>Settings</h1>
-        <p class="subtitle">Customize Pruceys Unblocked+.</p>
-        <div class="empty">
-          <label for="accentPicker">Accent color: </label>
-          <input type="color" id="accentPicker" value="#9565ff">
-        </div>
-      </section>
-    </div>
-
-    <section class="browser" id="browser">
-      <div class="browser-info">
-        <span id="browserTitle">Website</span>
-        <span>
-          <button class="small-button" id="favoriteButton">☆ Save</button>
-          <a id="externalLink" href="#" target="_blank" rel="noopener">Open website ↗</a>
-        </span>
-      </div>
-      <iframe id="browserFrame" allow="autoplay; fullscreen; encrypted-media; picture-in-picture"></iframe>
-    </section>
-  </main>
-</div>
-
-<script>
-const pages = document.querySelectorAll(".page");
-const navButtons = document.querySelectorAll(".nav-button");
-const browser = document.getElementById("browser");
-const frame = document.getElementById("browserFrame");
-const addressBar = document.getElementById("addressBar");
-const browserTitle = document.getElementById("browserTitle");
-const externalLink = document.getElementById("externalLink");
-
-let currentUrl = "";
-let currentTitle = "";
-let historyList = [];
-let historyIndex = -1;
-
-function showPage(pageName) {
-  browser.classList.remove("active");
-  pages.forEach(page => page.classList.toggle("active", page.id === pageName));
-  navButtons.forEach(button => button.classList.toggle("active", button.dataset.page === pageName));
-}
-
-function showBrowser() {
-  pages.forEach(page => page.classList.remove("active"));
-  navButtons.forEach(button => button.classList.remove("active"));
-  browser.classList.add("active");
-}
-
-function navigate(url, title = "Website", addHistory = true) {
-  currentUrl = url;
-  currentTitle = title;
-  frame.src = url;
-  addressBar.value = url;
-  browserTitle.textContent = title;
-  externalLink.href = url;
-  showBrowser();
-
-  if (addHistory) {
-    historyList = historyList.slice(0, historyIndex + 1);
-    historyList.push({url, title});
-    historyIndex = historyList.length - 1;
+// ================= POKI & HIT GAMES DATABASE =================
+// Using reliable GitHub HTML5 game mirrors of popular Poki games
+const POKI_GAMES = [
+  {
+    id: "subway-surfers",
+    title: "Subway Surfers",
+    thumb: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=400&q=80",
+    url: "https://ubg77.github.io/edit/subway-surfers/"
+  },
+  {
+    id: "monkey-mart",
+    title: "Monkey Mart",
+    thumb: "https://images.unsplash.com/photo-1540573133985-87b6da6d54a9?w=400&q=80",
+    url: "https://monkeymart.org/game/monkey-mart/"
+  },
+  {
+    id: "drive-mad",
+    title: "Drive Mad",
+    thumb: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&q=80",
+    url: "https://drivemad.net/game/drive-mad/"
+  },
+  {
+    id: "retro-bowl",
+    title: "Retro Bowl",
+    thumb: "https://images.unsplash.com/photo-1587280501635-68a0e82cd5ff?w=400&q=80",
+    url: "https://game316009.hostingerapp.com/"
+  },
+  {
+    id: "stickman-hook",
+    title: "Stickman Hook",
+    thumb: "https://images.unsplash.com/photo-1579373903781-fd5c0c30c4cd?w=400&q=80",
+    url: "https://ubg77.github.io/edit/stickman-hook/"
+  },
+  {
+    id: "tunnel-rush",
+    title: "Tunnel Rush",
+    thumb: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&q=80",
+    url: "https://ubg77.github.io/edit/tunnel-rush/"
   }
-}
+];
 
-function search(query) {
-  const cleaned = query.trim();
-  if (!cleaned) return;
-  navigate("https://duckduckgo.com/?q=" + encodeURIComponent(cleaned), "DuckDuckGo Search");
-}
+// App State
+let coins = parseInt(localStorage.getItem("prucey_coins")) || 250;
 
-function navigateAddress(value) {
-  const raw = value.trim();
-  if (!raw) return;
-
-  const looksLikeDomain =
-    !raw.includes(" ") &&
-    /^(https?:\/\/)?([\w-]+\.)+[a-z]{2,}(:\d+)?(\/.*)?$/i.test(raw);
-
-  if (looksLikeDomain) {
-    const url = /^https?:\/\//i.test(raw) ? raw : "https://" + raw;
-    navigate(url, raw);
-  } else {
-    search(raw);
-  }
-}
-
-navButtons.forEach(button => {
-  button.addEventListener("click", () => showPage(button.dataset.page));
+// ================= INITIALIZATION =================
+document.addEventListener("DOMContentLoaded", () => {
+  renderGames();
+  setupNavigation();
+  setupMiniBrowser();
+  setupAIandChat();
+  setupShop();
+  setupSettingsAndPanic();
 });
 
-document.querySelectorAll("[data-url]").forEach(button => {
-  button.addEventListener("click", () => {
-    const title = button.querySelector("strong")?.textContent || "Website";
-    navigate(button.dataset.url, title);
+// ================= TAB NAVIGATION =================
+function setupNavigation() {
+  const navItems = document.querySelectorAll(".nav-item");
+  const tabViews = document.querySelectorAll(".tab-view");
+
+  navItems.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const targetTab = btn.getAttribute("data-tab");
+
+      navItems.forEach((i) => i.classList.remove("active"));
+      btn.classList.add("active");
+
+      tabViews.forEach((view) => {
+        view.classList.toggle("active", view.id === `view-${targetTab}`);
+      });
+    });
   });
-});
-
-document.getElementById("goButton").addEventListener("click", () => {
-  navigateAddress(addressBar.value);
-});
-
-addressBar.addEventListener("keydown", event => {
-  if (event.key === "Enter") navigateAddress(addressBar.value);
-});
-
-document.getElementById("searchForm").addEventListener("submit", event => {
-  event.preventDefault();
-  search(document.getElementById("homeSearch").value);
-});
-
-document.getElementById("homeButton").addEventListener("click", () => {
-  showPage("home");
-});
-
-document.getElementById("backButton").addEventListener("click", () => {
-  if (historyIndex > 0) {
-    historyIndex--;
-    const item = historyList[historyIndex];
-    navigate(item.url, item.title, false);
-  }
-});
-
-document.getElementById("forwardButton").addEventListener("click", () => {
-  if (historyIndex < historyList.length - 1) {
-    historyIndex++;
-    const item = historyList[historyIndex];
-    navigate(item.url, item.title, false);
-  }
-});
-
-function getFavorites() {
-  try { return JSON.parse(localStorage.getItem("pruceysFavorites") || "[]"); }
-  catch { return []; }
 }
 
-function renderFavorites() {
-  const grid = document.getElementById("favoritesGrid");
+// ================= GAMES SECTION =================
+function renderGames(filter = "") {
+  const grid = document.getElementById("games-grid");
   grid.innerHTML = "";
-  getFavorites().forEach(item => {
-    const button = document.createElement("button");
-    button.className = "card";
-    button.innerHTML = "<div class='icon'>☆</div><strong></strong><small></small>";
-    button.querySelector("strong").textContent = item.title;
-    button.querySelector("small").textContent = item.url;
-    button.addEventListener("click", () => navigate(item.url, item.title));
-    grid.appendChild(button);
+
+  const filtered = POKI_GAMES.filter((g) =>
+    g.title.toLowerCase().includes(filter.toLowerCase())
+  );
+
+  filtered.forEach((game) => {
+    const card = document.createElement("div");
+    card.className = "game-card";
+    card.innerHTML = `
+      <img src="${game.thumb}" alt="${game.title}" loading="lazy" />
+      <div class="game-card-title">${game.title}</div>
+    `;
+    card.addEventListener("click", () => launchGame(game));
+    grid.appendChild(card);
   });
-  if (!grid.children.length) {
-    grid.innerHTML = "<div class='empty'>You haven't saved any websites yet.</div>";
-  }
+
+  document.getElementById("game-search").addEventListener("input", (e) => {
+    renderGames(e.target.value.trim());
+  });
 }
 
-document.getElementById("favoriteButton").addEventListener("click", () => {
-  if (!currentUrl) return;
-  const favorites = getFavorites();
-  if (!favorites.some(item => item.url === currentUrl)) {
-    favorites.push({url: currentUrl, title: currentTitle});
-    localStorage.setItem("pruceysFavorites", JSON.stringify(favorites));
-  }
-  renderFavorites();
-  document.getElementById("favoriteButton").textContent = "★ Saved";
-});
+const gameModal = document.getElementById("game-modal");
+const playerIframe = document.getElementById("player-iframe");
+const playerTitle = document.getElementById("player-game-title");
 
-document.querySelector('[data-page="favorites"]').addEventListener("click", renderFavorites);
+function launchGame(game) {
+  playerTitle.textContent = game.title;
+  playerIframe.src = game.url;
+  gameModal.classList.remove("hidden");
 
-const accentPicker = document.getElementById("accentPicker");
-const savedAccent = localStorage.getItem("pruceysAccent");
-if (savedAccent) {
-  document.documentElement.style.setProperty("--accent", savedAccent);
-  accentPicker.value = savedAccent;
+  // Reward points for playing
+  coins += 10;
+  updateCoins();
 }
-accentPicker.addEventListener("input", event => {
-  document.documentElement.style.setProperty("--accent", event.target.value);
-  localStorage.setItem("pruceysAccent", event.target.value);
+
+document.getElementById("modal-close").addEventListener("click", () => {
+  gameModal.classList.add("hidden");
+  playerIframe.src = "";
 });
 
-renderFavorites();
-</script>
-</body>
-</html>
+document.getElementById("modal-reload").addEventListener("click", () => {
+  if (playerIframe.src) playerIframe.src = playerIframe.src;
+});
+
+document.getElementById("modal-fullscreen").addEventListener("click", () => {
+  const container = document.getElementById("player-container");
+  if (!document.fullscreenElement) {
+    container.requestFullscreen();
+  } else {
+    document.exitFullscreen();
+  }
+});
+
+// ================= MINI BROWSER =================
+function setupMiniBrowser() {
+  const frame = document.getElementById("browser-frame");
+  const input = document.getElementById("browser-url");
+  const goBtn = document.getElementById("browser-go");
+  const reloadBtn = document.getElementById("b-reload");
+  const fsBtn = document.getElementById("browser-fullscreen");
+
+  function loadURL(url) {
+    if (!url.startsWith("http://") && !url.startsWith("https://")) {
+      // Treat as search query
+      url = `https://duckduckgo.com/?q=${encodeURIComponent(url)}&kae=d`;
+    }
+    input.value = url;
+    frame.src = url;
+  }
+
+  goBtn.addEventListener("click", () => loadURL(input.value.trim()));
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") loadURL(input.value.trim());
+  });
+
+  reloadBtn.addEventListener("click", () => {
+    frame.src = frame.src;
+  });
+
+  fsBtn.addEventListener("click", () => {
+    frame.requestFullscreen();
+  });
+
+  // Bookmark shortcuts (YouTube, Spotify, DuckDuckGo, Bing)
+  document.querySelectorAll(".b-mark").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      loadURL(btn.getAttribute("data-url"));
+    });
+  });
+}
+
+// ================= AI ASSISTANT & CHAT ROOM =================
+function setupAIandChat() {
+  // Mini AI
+  const aiInput = document.getElementById("ai-input");
+  const aiSend = document.getElementById("ai-send-btn");
+  const aiBox = document.getElementById("ai-messages");
+
+  function sendAIMsg() {
+    const text = aiInput.value.trim();
+    if (!text) return;
+
+    aiBox.innerHTML += `<div class="chat-bubble user">${text}</div>`;
+    aiInput.value = "";
+    aiBox.scrollTop = aiBox.scrollHeight;
+
+    setTimeout(() => {
+      const replies = [
+        "That's a great strategy! Focus on timing your jumps for a high score.",
+        "Check the settings tab if you need to quickly disguise your active window.",
+        "Need game recommendations? Drive Mad and Subway Surfers are trending right now!",
+        "I'm here to help you multitask efficiently."
+      ];
+      const botResponse = replies[Math.floor(Math.random() * replies.length)];
+      aiBox.innerHTML += `<div class="chat-bubble ai"><strong>Prucey AI:</strong> ${botResponse}</div>`;
+      aiBox.scrollTop = aiBox.scrollHeight;
+    }, 600);
+  }
+
+  aiSend.addEventListener("click", sendAIMsg);
+  aiInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") sendAIMsg();
+  });
+
+  // Global Chat Simulation
+  const roomInput = document.getElementById("room-input");
+  const roomSend = document.getElementById("room-send-btn");
+  const roomBox = document.getElementById("room-messages");
+
+  function sendRoomMsg() {
+    const text = roomInput.value.trim();
+    if (!text) return;
+
+    roomBox.innerHTML += `<div class="chat-bubble user">${text}</div>`;
+    roomInput.value = "";
+    roomBox.scrollTop = roomBox.scrollHeight;
+  }
+
+  roomSend.addEventListener("click", sendRoomMsg);
+  roomInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") sendRoomMsg();
+  });
+}
+
+// ================= SHOP LOGIC =================
+function setupShop() {
+  updateCoins();
+  document.querySelectorAll(".buy-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const cost = parseInt(btn.getAttribute("data-cost"));
+      if (coins >= cost) {
+        coins -= cost;
+        updateCoins();
+        btn.textContent = "Purchased!";
+        btn.style.background = "#22c55e";
+        btn.disabled = true;
+      } else {
+        alert("Not enough P-Coins! Play more games to earn coins.");
+      }
+    });
+  });
+}
+
+function updateCoins() {
+  localStorage.setItem("prucey_coins", coins);
+  document.getElementById("user-coins").textContent = coins;
+  const statCoins = document.getElementById("stat-coins");
+  if (statCoins) statCoins.textContent = coins;
+}
+
+// ================= SETTINGS, TAB CLOAK & PANIC =================
+function setupSettingsAndPanic() {
+  const panicBtn = document.getElementById("panic-btn");
+  const panicUrlInput = document.getElementById("panic-url");
+
+  function triggerPanic() {
+    const redirect = panicUrlInput.value.trim() || "https://classroom.google.com";
+    window.location.replace(redirect);
+  }
+
+  panicBtn.addEventListener("click", triggerPanic);
+
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "`" || e.key === "~") {
+      triggerPanic();
+    }
+  });
+
+  // Cloaker presets
+  document.querySelectorAll(".cloak-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const title = btn.getAttribute("data-title");
+      const icon = btn.getAttribute("data-icon");
+      document.title = title;
+      document.getElementById("page-favicon").href = icon;
+    });
+  });
+}
