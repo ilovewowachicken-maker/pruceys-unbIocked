@@ -90,11 +90,18 @@ button {cursor:pointer;color:inherit}
   background:var(--bg);
   display:flex;
   justify-content:space-between;
+  align-items:center;
   gap:10px;
   white-space:nowrap;
+  cursor:pointer;
 }
 .tab.active {border-color:var(--accent);background:var(--panel2)}
-.tab button {background:transparent;border:0;color:var(--muted)}
+.tab-close {
+  background:transparent;
+  border:0;
+  color:var(--muted);
+  font-size:17px;
+}
 .add-tab,.tool {
   background:var(--panel2);
   border:1px solid var(--border);
@@ -177,7 +184,13 @@ h2 {font-size:22px;margin-top:35px}
   display:flex;
   justify-content:space-between;
 }
-select {background:var(--panel2);color:white;padding:8px;border:1px solid var(--border);border-radius:8px}
+select {
+  background:var(--panel2);
+  color:white;
+  padding:8px;
+  border:1px solid var(--border);
+  border-radius:8px;
+}
 .external-link {
   display:inline-block;
   background:var(--accent);
@@ -187,14 +200,42 @@ select {background:var(--panel2);color:white;padding:8px;border:1px solid var(--
   text-decoration:none;
   font-weight:bold;
 }
-iframe {
+
+/* EMBEDDED BROWSER */
+.browser-view {
   display:none;
+  position:absolute;
+  inset:0;
+  background:white;
+  flex-direction:column;
+}
+.browser-view.visible {display:flex}
+.frame-help {
+  background:var(--panel);
+  color:var(--muted);
+  padding:8px 12px;
+  font-size:12px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+.frame-help a {
+  color:white;
+  text-decoration:none;
+  background:var(--accent);
+  padding:7px 11px;
+  border-radius:7px;
+  white-space:nowrap;
+}
+#browserFrame {
+  display:block;
+  flex:1;
   width:100%;
-  height:100%;
+  min-height:0;
   border:0;
   background:white;
 }
-iframe.visible {display:block}
 @media(max-width:650px) {
   .sidebar {width:68px}
   .sidebar .nav-label,.sidebar .nav-text,.sidebar .logo span {display:none}
@@ -246,26 +287,20 @@ iframe.visible {display:block}
 <main class="main">
 
 <header class="top">
-  <div class="tabs" id="tabs">
-    <button class="tab active" data-tab="1">
-      <span>Home</span><button class="tab-close">×</button>
-    </button>
-    <button class="add-tab" id="newTab">+</button>
-  </div>
+  <div class="tabs" id="tabs"></div>
 
   <div class="toolbar">
-    <button class="tool" id="back">←</button>
-    <button class="tool" id="forward">→</button>
-    <button class="tool" id="refresh">↻</button>
-    <button class="tool" id="homeButton">⌂</button>
-    <input class="address" id="address" placeholder="Search DuckDuckGo...">
-    <button class="tool" id="favorite">☆</button>
+    <button class="tool" id="back" title="Back">←</button>
+    <button class="tool" id="forward" title="Forward">→</button>
+    <button class="tool" id="refresh" title="Refresh">↻</button>
+    <button class="tool" id="homeButton" title="Home">⌂</button>
+    <input class="address" id="address" placeholder="Search or enter a website address...">
+    <button class="tool" id="favorite" title="Add favorite">☆</button>
   </div>
 </header>
 
 <div class="content" id="content">
 
-<!-- HOME -->
 <section class="page active" id="home">
   <h1>What are we doing today?</h1>
   <p class="subtitle">Welcome to Pruceys Unblocked+.</p>
@@ -292,7 +327,6 @@ iframe.visible {display:block}
   </div>
 </section>
 
-<!-- MUSIC -->
 <section class="page" id="music">
   <h1>Music</h1>
   <p class="subtitle">Find your favorite music.</p>
@@ -312,27 +346,18 @@ iframe.visible {display:block}
   </div>
 </section>
 
-<!-- GAMES -->
 <section class="page" id="games">
   <h1>Games</h1>
   <p class="subtitle">Explore games on Poki.</p>
-
   <div class="notice">
-    Browse the official Poki games library below.
-    If the embedded website is unavailable, use the button to visit Poki directly.
+    Poki will try to load right here. If its website doesn't allow embedding,
+    use the button above the page to open it separately.
   </div>
-
-  <p style="margin-top:25px">
-    <a class="external-link"
-       href="https://poki.com/"
-       target="_blank"
-       rel="noopener noreferrer">
-       Open Poki Games
-    </a>
+  <p style="margin-top:20px">
+    <button class="primary" id="loadPoki">Load Poki</button>
   </p>
 </section>
 
-<!-- CHAT -->
 <section class="page" id="chat">
   <h1>Community Chat</h1>
   <p class="subtitle">Talk with the Pruceys community.</p>
@@ -342,7 +367,6 @@ iframe.visible {display:block}
   </div>
 </section>
 
-<!-- AI -->
 <section class="page" id="ai">
   <h1>✦ Pruceys AI</h1>
   <p class="subtitle">Your personal assistant.</p>
@@ -354,14 +378,12 @@ iframe.visible {display:block}
   </a>
 </section>
 
-<!-- FAVORITES -->
 <section class="page" id="bookmarks">
   <h1>☆ Favorites</h1>
   <p class="subtitle">Your saved searches.</p>
   <div class="grid" id="bookmarkList"></div>
 </section>
 
-<!-- ACCOUNT -->
 <section class="page" id="account">
   <h1>Your Account</h1>
   <p class="subtitle">Your Pruceys profile.</p>
@@ -371,7 +393,6 @@ iframe.visible {display:block}
   </div>
 </section>
 
-<!-- SETTINGS -->
 <section class="page" id="settings">
   <h1>Settings</h1>
   <p class="subtitle">Customize Pruceys.</p>
@@ -391,8 +412,18 @@ iframe.visible {display:block}
   <button class="primary" id="reset">Reset settings</button>
 </section>
 
-<!-- SEARCH RESULTS -->
-<iframe id="searchFrame" title="DuckDuckGo results"></iframe>
+<div class="browser-view" id="browserView">
+  <div class="frame-help">
+    <span>If the website refuses to load here, try opening it separately.</span>
+    <a id="openExternal" href="#" target="_blank" rel="noopener noreferrer">Open website ↗</a>
+  </div>
+  <iframe
+    id="browserFrame"
+    title="Pruceys browser"
+    allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+    referrerpolicy="strict-origin-when-cross-origin">
+  </iframe>
+</div>
 
 </div>
 </main>
@@ -400,9 +431,11 @@ iframe.visible {display:block}
 
 <script>
 const sidebar = document.getElementById("sidebar");
-const frame = document.getElementById("searchFrame");
+const frame = document.getElementById("browserFrame");
+const browserView = document.getElementById("browserView");
 const address = document.getElementById("address");
 const tabsElement = document.getElementById("tabs");
+const openExternal = document.getElementById("openExternal");
 
 let nextId = 2;
 let activeId = 1;
@@ -411,7 +444,9 @@ let tabs = [{
   id:1,
   title:"Home",
   page:"home",
-  query:""
+  url:"",
+  history:[],
+  historyIndex:-1
 }];
 
 let bookmarks = JSON.parse(
@@ -426,7 +461,7 @@ function renderTabs() {
   tabsElement.innerHTML = "";
 
   tabs.forEach(tab => {
-    const button = document.createElement("button");
+    const button = document.createElement("div");
     button.className = "tab" + (tab.id === activeId ? " active" : "");
 
     const name = document.createElement("span");
@@ -435,6 +470,7 @@ function renderTabs() {
     const close = document.createElement("button");
     close.className = "tab-close";
     close.textContent = "×";
+    close.title = "Close tab";
 
     close.onclick = e => {
       e.stopPropagation();
@@ -449,21 +485,29 @@ function renderTabs() {
   const add = document.createElement("button");
   add.className = "add-tab";
   add.textContent = "+";
+  add.title = "New tab";
   add.onclick = newTab;
   tabsElement.appendChild(add);
 }
 
-function showPage(page) {
-  frame.classList.remove("visible");
-
+function hidePages() {
   document.querySelectorAll(".page").forEach(p => {
-    p.classList.toggle("active",p.id === page);
+    p.classList.remove("active");
   });
+}
 
+function showPage(page) {
   const tab = currentTab();
+
   tab.page = page;
-  tab.query = "";
+  tab.url = "";
   tab.title = page.charAt(0).toUpperCase() + page.slice(1);
+
+  browserView.classList.remove("visible");
+  hidePages();
+
+  const pageElement = document.getElementById(page);
+  if(pageElement) pageElement.classList.add("active");
 
   address.value = "";
 
@@ -476,27 +520,72 @@ function showPage(page) {
   if(page === "bookmarks") renderBookmarks();
 }
 
+function displayUrl(url) {
+  const tab = currentTab();
+
+  tab.page = null;
+  tab.url = url;
+
+  hidePages();
+  browserView.classList.add("visible");
+
+  frame.src = url;
+  address.value = url;
+  openExternal.href = url;
+
+  document.querySelectorAll(".nav-btn").forEach(b => {
+    b.classList.remove("active");
+  });
+
+  renderTabs();
+}
+
+function navigate(url,title) {
+  const tab = currentTab();
+
+  tab.history = tab.history.slice(0,tab.historyIndex + 1);
+  tab.history.push({url,title});
+  tab.historyIndex = tab.history.length - 1;
+  tab.title = title || "Website";
+
+  displayUrl(url);
+}
+
 function search(query) {
   query = query.trim();
   if(!query) return;
 
-  const tab = currentTab();
-
-  tab.page = null;
-  tab.query = query;
-  tab.title = query;
-
-  document.querySelectorAll(".page").forEach(p => {
-    p.classList.remove("active");
-  });
-
   const url = "https://duckduckgo.com/?q=" + encodeURIComponent(query);
+  navigate(url,query);
+}
 
-  frame.src = url;
-  frame.classList.add("visible");
-  address.value = query;
+function navigateAddress(value) {
+  value = value.trim();
+  if(!value) return;
 
-  renderTabs();
+  const looksLikeUrl =
+    !value.includes(" ") &&
+    /^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/.test(value);
+
+  if(looksLikeUrl) {
+    let url = value;
+    if(!/^https?:\/\//i.test(url)) {
+      url = "https://" + url;
+    }
+
+    try {
+      const parsed = new URL(url);
+      if(parsed.protocol !== "http:" && parsed.protocol !== "https:") {
+        search(value);
+        return;
+      }
+      navigate(parsed.href,parsed.hostname);
+    } catch(e) {
+      search(value);
+    }
+  } else {
+    search(value);
+  }
 }
 
 function newTab() {
@@ -506,7 +595,9 @@ function newTab() {
     id,
     title:"New Tab",
     page:"home",
-    query:""
+    url:"",
+    history:[],
+    historyIndex:-1
   });
 
   activeId = id;
@@ -517,14 +608,8 @@ function switchTab(id) {
   activeId = id;
   const tab = currentTab();
 
-  if(tab.query) {
-    document.querySelectorAll(".page").forEach(p => {
-      p.classList.remove("active");
-    });
-    frame.classList.add("visible");
-    frame.src = "https://duckduckgo.com/?q=" + encodeURIComponent(tab.query);
-    address.value = tab.query;
-    renderTabs();
+  if(tab.url) {
+    displayUrl(tab.url);
   } else {
     showPage(tab.page || "home");
   }
@@ -532,7 +617,14 @@ function switchTab(id) {
 
 function closeTab(id) {
   if(tabs.length === 1) {
-    tabs[0] = {id:1,title:"Home",page:"home",query:""};
+    tabs[0] = {
+      id:1,
+      title:"Home",
+      page:"home",
+      url:"",
+      history:[],
+      historyIndex:-1
+    };
     activeId = 1;
     showPage("home");
     return;
@@ -557,15 +649,13 @@ document.querySelectorAll(".nav-btn").forEach(button => {
   button.onclick = () => showPage(button.dataset.page);
 });
 
-document.getElementById("newTab").onclick = newTab;
-
 document.getElementById("searchForm").onsubmit = e => {
   e.preventDefault();
   search(document.getElementById("searchInput").value);
 };
 
 address.addEventListener("keydown",e => {
-  if(e.key === "Enter") search(address.value);
+  if(e.key === "Enter") navigateAddress(address.value);
 });
 
 document.querySelectorAll("[data-search]").forEach(button => {
@@ -574,21 +664,39 @@ document.querySelectorAll("[data-search]").forEach(button => {
 
 document.getElementById("homeButton").onclick = () => showPage("home");
 
+document.getElementById("loadPoki").onclick = () => {
+  navigate("https://poki.com/","Poki");
+};
+
 document.getElementById("refresh").onclick = () => {
   const tab = currentTab();
-  if(tab.query) {
-    frame.src = "https://duckduckgo.com/?q=" + encodeURIComponent(tab.query);
+  if(tab.url) {
+    frame.src = tab.url;
   }
 };
 
 document.getElementById("back").onclick = () => {
-  if(frame.contentWindow) {
+  const tab = currentTab();
+
+  if(tab.historyIndex > 0) {
+    tab.historyIndex--;
+    const previous = tab.history[tab.historyIndex];
+    tab.title = previous.title;
+    displayUrl(previous.url);
+  } else if(tab.url) {
     try { frame.contentWindow.history.back(); } catch(e) {}
   }
 };
 
 document.getElementById("forward").onclick = () => {
-  if(frame.contentWindow) {
+  const tab = currentTab();
+
+  if(tab.historyIndex < tab.history.length - 1) {
+    tab.historyIndex++;
+    const next = tab.history[tab.historyIndex];
+    tab.title = next.title;
+    displayUrl(next.url);
+  } else if(tab.url) {
     try { frame.contentWindow.history.forward(); } catch(e) {}
   }
 };
@@ -596,13 +704,21 @@ document.getElementById("forward").onclick = () => {
 document.getElementById("favorite").onclick = () => {
   const tab = currentTab();
 
-  if(!tab.query) {
-    alert("Search for something first!");
+  if(!tab.url) {
+    alert("Open a website or search first!");
     return;
   }
 
-  if(!bookmarks.includes(tab.query)) {
-    bookmarks.push(tab.query);
+  const existing = bookmarks.some(item =>
+    (typeof item === "string" ? item : item.url) === tab.url
+  );
+
+  if(!existing) {
+    bookmarks.push({
+      title:tab.title,
+      url:tab.url
+    });
+
     localStorage.setItem("pruceysBookmarks",JSON.stringify(bookmarks));
     alert("Added to favorites!");
   } else {
@@ -620,14 +736,21 @@ function renderBookmarks() {
   }
 
   bookmarks.forEach(item => {
+    const saved = typeof item === "string"
+      ? {title:item,url:"https://duckduckgo.com/?q="+encodeURIComponent(item)}
+      : item;
+
     const button = document.createElement("button");
     button.className = "card";
+
     const title = document.createElement("strong");
-    title.textContent = item;
+    title.textContent = saved.title;
+
     const description = document.createElement("small");
-    description.textContent = "Search DuckDuckGo";
+    description.textContent = saved.url;
+
     button.append(title,description);
-    button.onclick = () => search(item);
+    button.onclick = () => navigate(saved.url,saved.title);
     list.appendChild(button);
   });
 }
@@ -636,7 +759,6 @@ function renderBookmarks() {
 const accent = document.getElementById("accent");
 
 accent.value = localStorage.getItem("pruceysAccent") || "#8b5cf6";
-
 document.documentElement.style.setProperty("--accent",accent.value);
 
 accent.onchange = () => {
